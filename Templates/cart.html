@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url('https://coralogix.com/wp-content/uploads/2017/03/e-commerce-1024x784.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            /* background-color: #070707; */
+            border-radius: 5px;
+            box-shadow: 0 0 10px white;
+        }
+
+        .panel {
+            margin-bottom: 20px;
+            border: 1px solid #f4f1f1;
+            border-radius: 5px;
+        }
+
+        .panel-heading {
+            /* background-color: lightblue; */
+            color: rgb(238, 235, 235);
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            font-weight: bolder;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            /* background-color: Lavender; */
+            color: rgb(253, 245, 245);
+        }
+
+        /* tr:nth-child(even) {
+            background-color: #f2f2f2;
+        } */
+
+        .btn {
+            text-decoration: none;
+            padding: 5px 10px;
+            margin: 2px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #337ab7;
+            color: #e82525;
+        }
+
+        .btn-danger {
+            background-color: #d9534f;
+            color: #1d4054;
+        }
+
+        img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        h1 {
+            color: rgb(238, 232, 232);
+            text-align: center;
+            font-weight: bold;
+        }
+
+        main {
+            color: rgb(246, 237, 246);
+            text-align: center;
+            font-weight: bolder;
+        }
+
+        .button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="main">
+        <h1>My Cart</h1>
+    </div>
+    <br><br>
+    <br><br>
+
+    <div class="container">
+        <div class="panel panel-dark">
+            <div class="panel-heading">
+                <h1 class="panel-title">Ordered Items</h1>
+            </div>
+
+            <table class="table table-hover" id="dev-table">
+                <thead>
+                    <tr>
+                        <th>Items</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th>Dscription</th>
+                        <th>Remove From Cart</th>
+                    </tr>
+                </thead>
+                {% for p in products %}
+                {% if p %}
+
+                <tr>
+                    <td> {{p.name}}</td>
+                    <td> <img src="{% static p.product_image.url %}" alt="Profile Pic" height="40px" width="40px" />
+                    </td>
+                    <td>{{p.price}}</td>
+                    <td>{{p.description}}</td>
+
+                    <td><a class="btn btn-danger btn-xs" href="{% url 'remove-from-cart' p.id  %}">
+                            <span class="glyphicon glyphicon-trash"></span></a></td>
+
+                </tr>
+                {%else%}
+                <br><br><br>
+                <h1>no products</h1>
+                {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="button">Total = {{total}}</div>
+    <a href="/customer-address"><button class="btn btn-primary"><span>Purchase</span></button></a>
+</body>
+
+</html>

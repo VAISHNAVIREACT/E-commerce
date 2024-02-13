@@ -1,0 +1,175 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+<br>
+{%include 'admin_dashboard_cards.html'%}
+
+
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url('https://png.pngtree.com/background/20230629/original/pngtree-armenia-s-online-shopping-experience-a-3d-render-for-social-media-picture-image_4090250.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px white;
+    }
+
+    .panel {
+        margin-bottom: 20px;
+        border: 1px solid #9589d2;
+        border-radius: 5px;
+    }
+
+    .panel-heading {
+        color: rgb(217, 107, 107);
+        padding: 10px;
+        border-bottom: 1px solid #2011c7;
+        font-weight: bolder;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        background-color: transparent; /* or background-color: inherit; */
+    }
+
+    th,
+    td {
+        border: 1px solid #778bdd;
+        padding: 8px;
+        text-align: left;
+        background-color: transparent; /* or background-color: inherit; */
+    }
+
+    th {
+        color: rgb(73, 61, 208);
+    }
+
+    .btn {
+        text-decoration: none;
+        padding: 5px 10px;
+        margin: 2px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #337ab7;
+        color: #e82525;
+    }
+
+    .btn-danger {
+        background-color: #d9534f;
+        color: #1d4054;
+    }
+
+    img {
+        max-width: 100px;
+        height: auto;
+    }
+
+    h1 {
+        color: rgb(238, 236, 232);
+        text-align: center;
+        font-weight: bold;
+    }
+
+    main {
+        color: rgb(197, 20, 197);
+        text-align: center;
+        font-weight: bolder;
+    }
+
+    .button {
+        background-color: #4caf50;
+        color: #25de14;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    .btn {
+        color: #c30606;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+
+</head>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+
+<br><br><br>
+
+<body>
+    <div class="container">
+        <div class="panel panel">
+            <div class="panel-heading">
+                <h1 class="panel-title">Booking Details</h1>
+            </div>
+            <table class="table table-hover" id="dev-table">
+                <thead>
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Image</th>
+                        <th>Delivery Address</th>
+                        <th>Items</th>
+                        <th>Status</th>
+                        <th>Update Status</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                {% for c in products %}
+                {% if c %}
+
+                <tr>
+                    <td> {{c.name}}</td>
+                    <td> <img src="{% static c.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" />
+                    </td>
+                    <td>{{c.Address}}</td>
+                    <td>{{c.Mobile}}</td>
+                    <td><a class="btn btn-primary btn-xs" href="{% url 'update-product' p.id  %}"><span
+                                class="glyphicon glyphicon-edit"></span></a></td>
+                    <td><a class="btn btn-danger btn-xs" href="{% url 'delete-product' p.id  %}"><span
+                                class="glyphicon glyphicon-trash"></span></a></td>
+
+                </tr>
+                {%else%}
+                <br><br><br>
+                <h1>no products</h1>
+                {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
+
+{% endblock content %}

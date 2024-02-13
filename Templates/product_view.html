@@ -1,0 +1,144 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+<br>
+{%include 'admin_dashboard_cards.html'%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products List</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-lZ5f/Fn4lL4Kkh1R8Ib0ftn4DdazfubHR8PjT6WfjD0I2zBX8N6FhPuYLiQ+DLeJkRAgp44QIOXAmxEVQWok1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url('https://img.freepik.com/free-photo/3d-illustration-smartphone-with-products-coming-out-screen-online-shopping-e-commerce-concept_58466-14529.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .panel {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .panel-heading {
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            color: white;
+        }
+
+
+        .btn {
+            text-decoration: none;
+            padding: 5px 10px;
+            margin: 2px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #337ab7;
+            color: #fff;
+        }
+
+        .btn-danger {
+            background-color: #d9534f;
+            color: #fff;
+        }
+
+        img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        h1 {
+            color: rgb(17, 17, 17);
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="panel "></div>
+          <div class="panel-heading">
+            <h1 class="panel-title">Total Product List</h1>
+          </div>
+          <table class="table table-hover" id="dev-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Dscription</th>
+                <th>Update</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            {% for p in products %}
+        {% if p %}
+      
+            <tr>
+              <td> {{p.name}}</td>
+              <td> <img src="{% static p.product_image.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+              <td>{{p.price}}</td>
+              <td>{{p.description}}</td>
+              <td><a class="btn btn-primary btn-xs" href="{% url 'update-product' p.id  %}"><span class="glyphicon glyphicon-edit"></span></a></td>
+              <td><a class="btn btn-danger btn-xs" href="{% url 'delete-product' p.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+      
+            </tr>
+            {%else%}
+            <br><br><br>
+            <h1>no products</h1>
+            {% endif %}
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+      <!-- add product floating button -->
+      <!-- <a href="/admin-add-product" class="float">
+      <i class="fa fa-plus my-float"></i>
+      </a> -->
+      <a href="admin-add-product"><img src="https://img.freepik.com/premium-vector/health-medical-logo-template_1948-4139.jpg" alt="" style="margin: 245px 1254px; position: absolute;"></a>
+    </body>
+</html>
+{% endblock content %}
+

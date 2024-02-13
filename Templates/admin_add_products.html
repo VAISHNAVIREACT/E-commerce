@@ -1,0 +1,89 @@
+{% extends "admin_base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Items</title>
+    <style>
+        body {
+            margin: 100px 283px;
+            font-family: Arial, sans-serif;
+            background-color: darkgray;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="post" enctype="multipart/form-data" class="container">
+        {% csrf_token %}
+        <div class="note">
+            <p class="ph">ADD ITEMS</p>
+        </div>
+        <div class="form-group">
+            <label for="{{ productForm.name.id_for_label }}">Name:</label>
+            {% render_field productForm.name class="form-control" placeholder="Name" %}
+        </div>
+        <div class="form-group">
+            <label for="{{ productForm.price.id_for_label }}">Price:</label>
+            {% render_field productForm.price class="form-control" placeholder="Price" %}
+        </div>
+        <div class="form-group">
+            <label for="{{ productForm.description.id_for_label }}">Description:</label>
+            {% render_field productForm.description class="form-control" placeholder="Description" %}
+        </div>
+        <div class="form-group">
+            <label for="{{ productForm.product_image.id_for_label }}">Product Image:</label>
+            {% render_field productForm.product_image class="form-control" placeholder="Product Image" %}
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+
+</html>
+
+{% endblock %}
